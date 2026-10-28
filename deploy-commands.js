@@ -1,5 +1,5 @@
 const { REST, Routes } = require('discord.js');
-const { clientId, guildId, token } = require('./config.json');
+const { DISCORD_CLIENT_ID, DISCORD_GUILD_ID, DISCORD_TOKEN } = process.env;
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -24,13 +24,13 @@ for (const folder of commandFolders) {
 }
 
 // Construct and prepare an instance of the REST module
-const rest = new REST().setToken(token);
+const rest = new REST().setToken(DISCORD_TOKEN);
 
 (async () => {
     try {
         console.log(`Started refreshing ${commands.length} application (/) commands.`);
         // The put method is used to fully refresh all commands in the guild with the current set
-        const data = await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands }); // don't specify a guildId to sync accross all guilds
+        const data = await rest.put(Routes.applicationGuildCommands(DISCORD_CLIENT_ID, DISCORD_GUILD_ID), { body: commands }); // don't specify a guildId to sync accross all guilds
 
         console.log(`Successfully reloaded ${data.length} application (/) commands.`);
     } catch (error) {

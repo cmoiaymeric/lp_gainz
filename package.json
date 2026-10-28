@@ -15,10 +15,10 @@
   "type": "commonjs",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node .",
-    "deploy" : "node deploy-commands.js",
-    "delete" : "node delete-commands.js"
+    "start": "node --env-file-if-exists=.env main.js",
+    "dev": "node --watch --env-file-if-exists=.env main.js",
+    "deploy" : "node --env-file-if-exists=.env deploy-commands.js",
+    "delete" : "node --env-file-if-exists=.env delete-commands.js"
   },
   "dependencies": {
     "discord.js": "^14.27.0"

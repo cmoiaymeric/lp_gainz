@@ -4,7 +4,7 @@ const path = require('node:path');
 module.exports = {
     data: new SlashCommandBuilder().setName('info').setDescription('Sends a description about the bot.'),
     async execute(interaction){
-        const thumbnailFile = new AttachmentBuilder(path.join(__dirname, '../../assets/img/worlds_image.jpg'), { name: 'worlds_image.jpg' });
+        const thumbnailFile = new AttachmentBuilder(path.join(__dirname, '../../assets/bot/worlds_image.jpg'), { name: 'worlds_image.jpg' });
 
         const exampleContainer = new ContainerBuilder()
         	.setAccentColor(0x0099ff)
