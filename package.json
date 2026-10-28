@@ -1,0 +1,26 @@
+{
+  "name": "lp_gainz",
+  "version": "0.0.1",
+  "description": "",
+  "homepage": "https://github.com/cmoiaymeric/lp_gainz#readme",
+  "bugs": {
+    "url": "https://github.com/cmoiaymeric/lp_gainz/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmoiaymeric/lp_gainz.git"
+  },
+  "license": "MIT",
+  "author": "cmoiaymeric",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .",
+    "deploy" : "node deploy-commands.js",
+    "delete" : "node delete-commands.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.27.0"
+  }
+}
