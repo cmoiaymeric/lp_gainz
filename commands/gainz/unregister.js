@@ -1,9 +1,7 @@
-const { SlashCommandBuilder, InteractionContextType, MessageFlags } = require('discord.js');
+const { SlashCommandBuilder, InteractionContextType } = require('discord.js');
 const guildRegistry = require('../../guild-registry');
 
 const riot = require('../../riot_api/summoner');
-
-const MAX_ACCOUNTS_PER_GUILD = 20;
 
 module.exports = {
     cooldown: 5,
