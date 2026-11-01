@@ -17,8 +17,9 @@
   "scripts": {
     "start": "node --env-file-if-exists=.env main.js",
     "dev": "node --watch --env-file-if-exists=.env main.js",
-    "deploy": "node --env-file-if-exists=.env deploy-commands.js",
-    "delete": "node --env-file-if-exists=.env delete-commands.js"
+    "deploy": "node --env-file-if-exists=.env scripts/deploy-commands.js",
+    "delete": "node --env-file-if-exists=.env scripts/delete-commands.js",
+    "emojis" : "node --env-file-if-exists=.env scripts/upload-emojis.js"
   },
   "dependencies": {
     "discord.js": "^14.27.0",
