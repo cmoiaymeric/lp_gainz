@@ -13,7 +13,7 @@ const {
 } = require('discord.js');
 const guildRegistry = require('../../guild-registry');
 
-const ACCENT_COLOR = 0x0099ff; // same as /info and /list
+const ACCENT_COLOR = 0x0099ff;
 
 const THUMBNAIL_PATH = path.join(__dirname, '../../assets/bot/worlds_image.jpg');
 const THUMBNAIL_NAME = 'worlds_image.jpg';

@@ -1,9 +1,10 @@
-const { SlashCommandBuilder, InteractionContextType } = require('discord.js');
+const { SlashCommandBuilder, InteractionContextType, ContainerBuilder, TextDisplayBuilder, MessageFlags } = require('discord.js');
 const guildRegistry = require('../../guild-registry');
 
 const riot = require('../../riot_api/summoner');
 
 const MAX_ACCOUNTS_PER_GUILD = 30;
+const ACCENT_COLOR = 0x0099ff;
 
 module.exports = {
     cooldown: 5,
@@ -25,16 +26,28 @@ module.exports = {
         const gameName = interaction.options.getString('summoner_name', true);
         const tagLine = interaction.options.getString('summoner_tag', true);
         const region = interaction.options.getString('region');
+        const container = new ContainerBuilder().setAccentColor(ACCENT_COLOR);
+        const textDisplay = new TextDisplayBuilder();
 
         if (guildRegistry.getGuild(interaction.guildId).accounts.length >= MAX_ACCOUNTS_PER_GUILD){
-            return interaction.reply({content: `This server already has \`${MAX_ACCOUNTS_PER_GUILD}\` accounts registered. It is the maximum amount for 1 server`});
+            textDisplay.setContent(`⚠️ This server already has \`${MAX_ACCOUNTS_PER_GUILD}\` accounts registered. It is the maximum amount for 1 server`);
+            container.addTextDisplayComponents(textDisplay);
+            return interaction.reply({
+                components: [container],
+                flags: MessageFlags.IsComponentsV2,
+            });
         }
 
         await interaction.deferReply();
 
-        const account = await riot.getAccount(gameName, tagLine);
+        const account = await riot.fetchAccount(gameName, tagLine);
         if(!account){
-            return interaction.editReply(`Couldn't find \`${gameName}#${tagLine}\`.`);
+            textDisplay.setContent(`Couldn't find \`${gameName}#${tagLine}\`.`);
+            container.addTextDisplayComponents(textDisplay);
+            return interaction.editReply({
+                components: [container],
+                flags: MessageFlags.IsComponentsV2,
+            });
         }
 
         const added = guildRegistry.addAccount(interaction.guildId, {
@@ -44,8 +57,19 @@ module.exports = {
             region: region,
             addedBy: interaction.user.id,
         });
-
-        await interaction.editReply(added ? `Now tracking **${account.gameName}#${account.tagLine}** on this server.`
-            : `**${account.gameName}#${account.tagLine}** is already tracked here.`);
+        if(added){
+            textDisplay.setContent(`✅ Now tracking \`${account.gameName}#${account.tagLine}\` on this server.`);
+            container.addTextDisplayComponents(textDisplay);
+            return interaction.editReply({
+                components: [container],
+                flags: MessageFlags.IsComponentsV2,
+            })
+        }
+        textDisplay.setContent(`⚠️ \`${account.gameName}#${account.tagLine}\` is already tracked here.`);
+        container.addTextDisplayComponents(textDisplay);
+        return interaction.editReply({
+            components: [container],
+            flags: MessageFlags.IsComponentsV2,
+        })
     },
 };

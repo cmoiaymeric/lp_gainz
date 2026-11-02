@@ -55,7 +55,7 @@ async function getSoloQueueEntry(account) {
     if (cached && Date.now() - cached.fetchedAt < RANK_CACHE_MS) return cached.entry;
 
     await waitForRiotSlot();
-    const entries = await riot.getSummonerRank(account.puuid, account.region);
+    const entries = await riot.fetchSummonerRank(account.puuid, account.region);
     const entry = entries.find((queue) => queue.queueType === 'RANKED_SOLO_5x5') ?? null;
 
     rankCache.set(account.puuid, { entry, fetchedAt: Date.now() });
