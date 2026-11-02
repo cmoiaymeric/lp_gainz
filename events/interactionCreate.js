@@ -28,7 +28,7 @@ module.exports = {
             if (now < expirationTime){
                 const expiredTimestamp = Math.round(expirationTime / 1_000);
                 return interaction.reply({
-                    content: `Please wait before using this command again, you are on a \`${command.data.name}\`. You can use it again in <t:${expiredTimestamp}:R>`,
+                    content: `Please wait before using this command again, you are on a \`${command.data.name}\`. You can use it again <t:${expiredTimestamp}:R>`,
                     flags: MessageFlags.Ephemeral,
                 });
             }
