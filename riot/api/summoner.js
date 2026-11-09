@@ -36,6 +36,7 @@ async function fetchLiveGame(puuid, region){
     let reqUrl = `https://${region}.api.riotgames.com/lol/spectator/v5/active-games/by-summoner/${puuid}?api_key=${RIOT_API_KEY}`;
 
     const response = await fetch(reqUrl);
+    if(response.status === 404) return null;
     if(!response.ok){
         throw new Error(`Get live game API call failed (${response.status})`);
     }

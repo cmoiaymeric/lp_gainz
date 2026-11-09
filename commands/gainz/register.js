@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, InteractionContextType, ContainerBuilder, TextDisplayBuilder, MessageFlags } = require('discord.js');
 const guildRegistry = require('../../guild-registry');
 
-const riot = require('../../riot_api/summoner');
+const riot = require('../../riot/api/summoner');
 
 const MAX_ACCOUNTS_PER_GUILD = 30;
 const ACCENT_COLOR = 0x0099ff;
