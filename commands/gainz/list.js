@@ -9,7 +9,7 @@ const {
     escapeMarkdown,
 } = require('discord.js');
 const guildRegistry = require('../../guild-registry');
-const riot = require('../../riot_api/summoner');
+const riot = require('../../riot/api/summoner');
 const { rankEmoji } = require('../../emojis');
 
 const ACCOUNTS_PER_PAGE = 10;
